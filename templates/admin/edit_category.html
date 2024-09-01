@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>EMS | Edit Category</title>
+    <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
+    <link href="../dist/css/sb-admin-2.css" rel="stylesheet">
+    <link href="../vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <style>
+        .errorWrap {
+            padding: 10px;
+            margin: 0 0 20px 0;
+            background: #fff;
+            border-left: 4px solid #dd3d36;
+            -webkit-box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
+            box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
+        }
+        .succWrap {
+            padding: 10px;
+            margin: 0 0 20px 0;
+            background: #fff;
+            border-left: 4px solid #5cb85c;
+            -webkit-box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
+            box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
+        }
+    </style>
+</head>
+<body>
+    <div id="wrapper">
+        <!-- Navigation -->
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+            <!-- / Header -->
+            {% include 'admin/includes/header.html' %}
+            <!-- / Leftbar -->
+            {% include 'admin/includes/leftbar.html' %}
+        </nav>
+
+        <div id="page-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header"> Edit Category</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">Edit Category</div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <form role="form" method="post">
+                                        <!-- Success / Error Message -->
+                                        {% if error %}
+                                            <div class="errorWrap"><strong>ERROR</strong> : {{ error }} </div>
+                                        {% elif msg %}
+                                            <div class="succWrap"><strong>SUCCESS</strong> : {{ msg }} </div>
+                                        {% endif %}
+
+                                        <p><strong>Last Updated at : </strong>{{ category.UpdationDate }}</p>
+                                        <!-- Category Name -->
+                                        <div class="form-group">
+                                            <label>Category</label>
+                                            <input class="form-control" type="text" name="category" value="{{ category.CategoryName }}" autocomplete="off" required autofocus>
+                                        </div>
+                                        <!-- Description -->
+                                        <div class="form-group">
+                                            <label>Description</label>
+                                            <textarea class="form-control" name="description" autofocus required>{{ category.CategoryDescription }}</textarea>
+                                        </div>
+                                        <!-- Status -->
+                                        <div class="form-group">
+                                            <label>Status</label>
+                                            <select class="form-control" name="status" required>
+                                                <option value="1" {% if category.IsActive %}selected{% endif %}>Active</option>
+                                                <option value="0" {% if not category.IsActive %}selected{% endif %}>Inactive</option>
+                                            </select>
+                                        </div>
+                                        <!-- Button -->
+                                        <div class="form-group" align="center">
+                                            <button type="submit" class="btn btn-primary" name="update">Update</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../vendor/jquery/jquery.min.js"></script>
+    <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../vendor/metisMenu/metisMenu.min.js"></script>
+    <script src="../dist/js/sb-admin-2.js"></script>
+</body>
+</html>

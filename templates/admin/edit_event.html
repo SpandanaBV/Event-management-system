@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>EMS | Edit Event</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .errorWrap {
+            padding: 10px;
+            margin: 0 0 20px 0;
+            background: #fff;
+            border-left: 4px solid #dd3d36;
+            -webkit-box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
+            box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
+        }
+        .succWrap {
+            padding: 10px;
+            margin: 0 0 20px 0;
+            background: #fff;
+            border-left: 4px solid #5cb85c;
+            -webkit-box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
+            box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container mt-5">
+        <h1 class="page-header">Edit Event</h1>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        <form method="post" enctype="multipart/form-data">
+            <!-- Category -->
+            <div class="form-group">
+                <label>Category</label>
+                <select class="form-control" name="category" required>
+                    {% for category in categories %}
+                        <option value="{{ category.id }}" {% if category.id == event.CategoryId %}selected{% endif %}>
+                            {{ category.CategoryName }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <!-- Sponsor -->
+            <div class="form-group">
+                <label>Event Sponsors</label>
+                <select class="form-control" name="sponser" required>
+                    {% for sponsor in sponsors %}
+                        <option value="{{ sponsor.id }}" {% if sponsor.id == event.SponserId %}selected{% endif %}>
+                            {{ sponsor.sponserName }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <!-- Event Name -->
+            <div class="form-group">
+                <label>Event Name</label>
+                <input class="form-control" type="text" name="eventname" value="{{ event.EventName }}" required>
+            </div>
+
+            <!-- Event Description -->
+            <div class="form-group">
+                <label>Event Description</label>
+                <textarea class="form-control" name="evetndescription" rows="5" required>{{ event.EventDescription }}</textarea>
+            </div>
+
+            <!-- Event Start Date -->
+            <div class="form-group">
+                <label>Event Start Date</label>
+                <input class="form-control" type="date" name="eventstartdate" value="{{ event.EventStartDate }}" required>
+            </div>
+
+            <!-- Event End Date -->
+            <div class="form-group">
+                <label>Event End Date</label>
+                <input class="form-control" type="date" name="eventenddate" value="{{ event.EventEndDate }}" required>
+            </div>
+
+            <!-- Event Location -->
+            <div class="form-group">
+                <label>Event Location</label>
+                <input class="form-control" type="text" name="eventlocation" value="{{ event.EventLocation }}" required>
+            </div>
+
+            <!-- Event Featured Image -->
+            <div class="form-group">
+                <label>Event Featured Image</label>
+                <img src="{{ url_for('static', filename='eventimages/' + event.EventImage) }}" style="border:solid #000 1px" width="300">
+                <a href="#">Change Event Image</a>
+            </div>
+
+            <!-- Button -->
+            <div class="form-group text-center">
+                <button type="submit" class="btn btn-primary" name="update">Update Event</button>
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>

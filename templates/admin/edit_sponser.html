@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>EMS | Edit Sponser</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .errorWrap {
+            padding: 10px;
+            margin: 0 0 20px 0;
+            background: #fff;
+            border-left: 4px solid #dd3d36;
+            -webkit-box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
+            box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
+        }
+        .succWrap {
+            padding: 10px;
+            margin: 0 0 20px 0;
+            background: #fff;
+            border-left: 4px solid #5cb85c;
+            -webkit-box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
+            box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
+        }
+    </style>
+</head>
+<body>
+<div class="container mt-5">
+    <h1 class="page-header">Edit Sponser</h1>
+    {% if msg %}
+        <div class="succWrap"><strong>SUCCESS</strong> : {{ msg }} </div>
+    {% endif %}
+    <form method="post">
+        <!-- Sponser Name -->
+        <div class="form-group">
+            <label>Sponser</label>
+            <input class="form-control" type="text" name="sponser" value="{{ sponser['sponserName'] }}" autocomplete="off" required autofocus>
+        </div>
+        <!-- Sponser Logo -->
+        <div class="form-group">
+            <label>Sponser Logo :</label>
+            <img src="static/sponsers/dc78d13a95344a4147b0b2657c851cda.png" width="250" height="200" alt="sample image" />
+            <a href="#">Update Logo</a> <!-- Placeholder link, update with your actual logic -->
+        </div>
+        <!-- Button -->
+        <div class="form-group text-center">
+            <button type="submit" class="btn btn-primary" name="update">Update</button>
+        </div>
+    </form>
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>

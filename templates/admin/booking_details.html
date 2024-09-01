@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>EMS | Add Category</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
+    <link href="../dist/css/sb-admin-2.css" rel="stylesheet">
+    <link href="../vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <style>
+        .errorWrap {
+            padding: 10px;
+            margin: 0 0 20px 0;
+            background: #fff;
+            border-left: 4px solid #dd3d36;
+            -webkit-box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .1);
+            box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .1);
+        }
+
+        .succWrap {
+            padding: 10px;
+            margin: 0 0 20px 0;
+            background: #fff;
+            border-left: 4px solid #5cb85c;
+            -webkit-box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .1);
+            box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .1);
+        }
+    </style>
+</head>
+
+<body>
+    <div id="wrapper">
+        <!-- Navigation -->
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+            <!-- / Header -->
+            {% include 'admin/includes/header.html' %}
+            <!-- / Leftbar -->
+            {% include 'admin/includes/leftbar.html' %}
+        </nav>
+
+        <div id="page-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header"> Booking Details</h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        {% for row in bookings %}
+                        <div class="panel-heading">
+                            #{{ row.BookingId }} Details
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <table width="100%" class="table table-striped table-bordered table-hover">
+                                        <tr>
+                                            <th>Booking Id</th>
+                                            <td>{{ row.BookingId }}</td>
+                                            <th>Booking Date</th>
+                                            <td>{{ row.BookingDate }}</td>
+                                            <th>Event Name</th>
+                                            <td><a href="{{ url_for('edit_event', sid=row.eid) }}" target="_blank">{{ row.EventName }}</a></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Number of Members</th>
+                                            <td>{{ row.NumberOfMembers }}</td>
+                                            <th>Booking Status</th>
+                                            <td colspan="3">{% if row.BookingStatus %}{{ row.BookingStatus }}{% else %}Not Confirmed yet{% endif %}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Full Name</th>
+                                            <td>{{ row.FullName }}</td>
+                                            <th>Email Id</th>
+                                            <td>{{ row.Emailid }}</td>
+                                            <th>Phone Number</th>
+                                            <td>{{ row.PhoneNumber }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>User Remark</th>
+                                            <td colspan="5">{{ row.UserRemark }}</td>
+                                        </tr>
+                                        {% if row.UserCancelRemark %}
+                                        <tr>
+                                            <th>User Cancellation Remark</th>
+                                            <td colspan="5">{{ row.UserCancelRemark }}</td>
+                                        </tr>
+                                        {% endif %}
+                                        {% if row.AdminRemark %}
+                                        <tr>
+                                            <th>Admin Remark</th>
+                                            <td colspan="5">{{ row.AdminRemark }}</td>
+                                        </tr>
+                                        {% endif %}
+                                        {% if row.LastUpdationDate %}
+                                        <tr>
+                                            <th>Last Updation Date</th>
+                                            <td colspan="5">{{ row.LastUpdationDate }}</td>
+                                        </tr>
+                                        {% endif %}
+                                    </table>
+                                    {% if not row.BookingStatus %}
+                                    <div class="form-group" align="center">
+                                        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Take Action</button>
+                                    </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <!-- /.row (nested) -->
+                        </div>
+                        <!-- /.panel-body -->
+                        {% endfor %}
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /#page-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- Take action model -->
+    <div id="myModal" class="modal fade" role="dialog" style="margin-top:10%">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Admin take action</h4>
+                </div>
+                <div class="modal-body">
+                    <form name="adminremark" method="post">
+                        <p><textarea placeholder="Admin remark" class="form-control" name="adminremark" required="true"></textarea></p>
+                        <p><select name="status" required="true" class="form-control">
+                                <option value="Confirmed">Confirmed</option>
+                                <option value="Cancelled">Cancelled</option>
+                            </select></p>
+                        <p><button type="submit" class="btn btn-info btn-lg" name="updatebooking">Submit</button></p>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- jQuery -->
+    <script src="../vendor/jquery/jquery.min.js"></script>
+    <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../vendor/metisMenu/metisMenu.min.js"></script>
+    <script src="../dist/js/sb-admin-2.js"></script>
+</body>
+
+</html>

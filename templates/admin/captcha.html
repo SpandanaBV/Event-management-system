@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Captcha Example</title>
+    <style>
+        /* CSS styles */
+        h2 {
+            color: blue;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        input[type="text"], input[type="submit"] {
+            margin-bottom: 10px;
+        }
+
+        img {
+            border: 1px solid black;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Enter the Captcha</h2>
+    <img src="data:image/jpeg;base64,{{ captcha_image }}" alt="Captcha Image"><br>
+    <form action="verify_captcha" method="post">
+        <input type="text" name="captcha_input" placeholder="Enter Captcha"><br>
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</body>
+</html>

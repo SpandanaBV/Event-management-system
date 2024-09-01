@@ -1,0 +1,85 @@
+<div class="navbar-default sidebar" role="navigation">
+    <div class="sidebar-nav navbar-collapse">
+        <ul class="nav" id="side-menu">
+            <li>
+                <a href="{{ url_for('dashboard') }}"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+            </li>
+            <li>
+                <a href="#"><i class="fa fa-files-o"></i> Category<span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    <li>
+                        <a href="{{ url_for('add_category') }}">Add</a>
+                    </li>
+                    <li>
+                        <a href="{{ url_for('manage_category') }}">Manage</a>
+                    </li>
+                </ul>
+                <!-- /.nav-second-level -->
+            </li>
+            <li>
+                <a href="{{ url_for('manage_sponsors') }}"><i class="fa fa-files-o"></i> Manage Sponsors</a>
+            </li>
+            <li>
+                <a href="#"><i class="fa fa-table fa-fw"></i> Events<span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    <li>
+                        <a href="{{ url_for('add_event') }}">Add</a>
+                    </li>
+                    <li>
+                        <a href="{{ url_for('manage_events') }}">Manage</a>
+                    </li>
+                </ul>
+                <!-- /.nav-second-level -->
+            </li>
+            <li>
+                <a href="{{ url_for('manage_users') }}"><i class="fa fa-users"></i> Manage Users</a>
+            </li>
+            <li>
+                <a href="{{ url_for('manage_subscribers') }}"><i class="fa fa-users"></i> Manage Subscribers</a>
+            </li>
+            <li>
+                <a href="#"><i class="fa fa-book"></i> Manage Bookings<span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    <li>
+                        <a href="{{ url_for('all_bookings') }}">All Bookings</a>
+                    </li>
+                    <li>
+                        <a href="{{ url_for('new_bookings') }}">New Bookings</a>
+                    </li>
+                    <li>
+                        <a href="{{ url_for('cancelled_bookings') }}">Cancelled Bookings</a>
+                    </li>
+                    <li>
+                        <a href="{{ url_for('confirmed_bookings') }}">Confirmed Bookings</a>
+                    </li>
+                </ul>
+                <!-- /.nav-second-level -->
+            </li>
+            <li>
+                <a href="#"><i class="fa fa-files-o fa-fw"></i> News<span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    <li>
+                        <a href="{{ url_for('add_news') }}">Add</a>
+                    </li>
+                    <li>
+                        <a href="{{ url_for('manage_news') }}">Manage</a>
+                    </li>
+                </ul>
+                <!-- /.nav-second-level -->
+            </li>
+            <li>
+                <a href="#"><i class="fa fa-wrench fa-fw"></i> Website Setting<span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    <li>
+                        <a href="{{ url_for('about_us') }}">About us</a>
+                    </li>
+                    <li>
+                        <a href="{{ url_for('website_setting') }}">General Settings</a>
+                    </li>
+                </ul>
+                <!-- /.nav-second-level -->
+            </li>
+        </ul>
+    </div>
+    <!-- /.sidebar-collapse -->
+</div>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>EMS | Edit User Profile</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .errorWrap {
+            padding: 10px;
+            margin: 0 0 20px 0;
+            background: #fff;
+            border-left: 4px solid #dd3d36;
+            -webkit-box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
+            box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
+        }
+        .succWrap {
+            padding: 10px;
+            margin: 0 0 20px 0;
+            background: #fff;
+            border-left: 4px solid #5cb85c;
+            -webkit-box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
+            box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
+        }
+    </style>
+</head>
+<body>
+<div class="container mt-5">
+    <h1 class="page-header">Edit User Profile</h1>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="{{ 'succWrap' if category == 'success' else 'errorWrap' }}">
+                    <strong>{{ category | capitalize }}</strong> : {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    <form method="post">
+        <h3 align="center">{{ user['FullName'] }}'s Profile</h3>
+        <hr />
+        <!-- Registration Date -->
+        <p><strong>Reg Date : </strong>{{ user['RegDate'].strftime('%Y-%m-%d') }}</p>
+        <!-- Last Updation Date -->
+        {% if user['LastUpdationDate'] %}
+            <p><strong>Last Updated at : </strong>{{ user['LastUpdationDate'].strftime('%Y-%m-%d') }}</p>
+        {% endif %}
+        <!-- Username -->
+        <div class="form-group">
+            <label>Username</label>
+            <input class="form-control" type="text" name="username" value="{{ user['UserName'] }}" readonly>
+        </div>
+        <!-- Fullname -->
+        <div class="form-group">
+            <label>Fullname</label>
+            <input class="form-control" type="text" name="name" value="{{ user['FullName'] }}" required>
+        </div>
+        <!-- Email id -->
+        <div class="form-group">
+            <label>Email id</label>
+            <input class="form-control" type="email" name="email" value="{{ user['Emailid'] }}" required>
+        </div>
+        <!-- Phone Number -->
+        <div class="form-group">
+            <label>Phone Number</label>
+            <input class="form-control" type="text" name="phonenumber" pattern="[0-9]{10}" title="10 numeric characters only" value="{{ user['PhoneNumber'] }}" required>
+        </div>
+        <!-- Gender -->
+        <div class="form-group">
+            <label>Gender</label>
+            <select class="form-control" name="gender" required>
+                <option value="{{ user['UserGender'] }}">{{ user['UserGender'] }}</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Transgender">Transgender</option>
+            </select>
+        </div>
+        <!-- Status -->
+        <div class="form-group">
+            <label>Status</label>
+            <select class="form-control" name="status" required>
+                <option value="1" {% if user['IsActive'] == 1 %}selected{% endif %}>Active</option>
+                <option value="0" {% if user['IsActive'] == 0 %}selected{% endif %}>Blocked</option>
+            </select>
+        </div>
+        <!-- Button -->
+        <div class="form-group text-center">
+            <button type="submit" class="btn btn-primary" name="update">Update</button>
+        </div>
+    </form>
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>
